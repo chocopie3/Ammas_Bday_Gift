@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom Mood Meter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        .meter-container { max-width: 400px; margin: 40px auto; text-align: center; }
+        .meter-label { font-size: 1.3em; margin-bottom: 18px; color: #7c43bd; }
+        .mood-meter {
+            width: 100%; height: 40px; background: #ede7f6; border-radius: 20px; position: relative; margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(124,67,189,0.10);
+        }
+        .mood-pointer {
+            position: absolute; top: -18px; width: 36px; height: 36px; background: #b39ddb; border-radius: 50%;
+            left: 0; transition: left 0.6s cubic-bezier(.62,.01,.36,1);
+            display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.5em; border: 3px solid #7c43bd;
+        }
+        .mood-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .mood-btn {
+            background: #ede7f6; color: #7c43bd; border: 2px solid #7c43bd; border-radius: 18px; padding: 8px 18px; font-size: 1em; cursor: pointer; margin: 0 4px; transition: background 0.2s;
+            text-align: center;
+            padding: 10px 16px;
+            font-size: 1em;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+        .mood-btn:hover {
+            background: #b39ddb; color: #fff;
+            transform: scale(1.1);
+        }
+        .back-btn { margin-top: 32px; background: #b39ddb; color: #fff; border: none; border-radius: 18px; padding: 10px 28px; font-size: 1.1em; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="meter-container">
+        <h2 style="font-family: 'Dancing Script', cursive; color: #7c43bd;">Mom Mood Meter</h2>
+        <div class="meter-label" id="mood-label">How are you feeling today?</div>
+        <div class="mood-meter" id="mood-meter">
+            <div class="mood-pointer" id="mood-pointer">😊</div>
+        </div>
+        <div class="mood-options" id="mood-options"></div>
+        <button class="mood-btn" id="random-mood">Random</button>
+        <button class="back-btn" onclick="window.location.href='celebration.html'">Back</button>
+    </div>
+    <script>
+    const moods = [
+        {emoji: '😊', label: 'Happy', msg: 'You light up every room, Amma!'},
+        {emoji: '🥰', label: 'Loved', msg: 'You are so loved, always.'},
+        {emoji: '😌', label: 'Peaceful', msg: 'Enjoy your well-deserved peace.'},
+        {emoji: '🍫', label: 'Sweet Tooth', msg: 'Time for a treat!'},
+        {emoji: '🌸', label: 'Grateful', msg: 'Thank you for everything you do.'},
+        {emoji: '😴', label: 'Sleepy', msg: 'You deserve a nap and a break.'},
+        {emoji: '🤗', label: 'Huggy', msg: 'Sending you a big, warm hug!'},
+        {emoji: '😡', label: 'Angry', msg: 'It’s okay to feel mad. You’re still amazing!'},
+        {emoji: '😢', label: 'Upset', msg: 'Sending extra love your way.'},
+        {emoji: '😬', label: 'Stressed', msg: 'Take a deep breath. You’ve got this.'},
+        {emoji: '😆', label: 'Silly', msg: 'Let’s do something fun and goofy!'},
+        {emoji: '😎', label: 'Cool', msg: 'You’re the coolest mom ever.'},
+        {emoji: '🤩', label: 'Excited', msg: 'Yay! Let’s celebrate you!'},
+        {emoji: '😇', label: 'Blessed', msg: 'You are a blessing to us all.'}
+    ];
+    const meter = document.getElementById('mood-meter');
+    const pointer = document.getElementById('mood-pointer');
+    const label = document.getElementById('mood-label');
+    const options = document.getElementById('mood-options');
+    moods.forEach((mood, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'mood-btn';
+        btn.textContent = mood.label;
+        btn.onclick = () => setMood(i);
+        options.appendChild(btn);
+    });
+    function setMood(idx) {
+        const percent = idx / (moods.length-1);
+        pointer.style.left = `calc(${percent*100}% - 18px)`;
+        pointer.textContent = moods[idx].emoji;
+        label.textContent = moods[idx].msg;
+    }
+    document.getElementById('random-mood').onclick = () => {
+        const idx = Math.floor(Math.random()*moods.length);
+        setMood(idx);
+    };
+    setMood(0);
+    </script>
+</body>
+</html>

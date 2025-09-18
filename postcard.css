@@ -1,0 +1,59 @@
+/* Purple theme for modal */
+.postcard-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(124,67,189,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.postcard-content {
+    background: #f3e5f5;
+    border: 4px solid #7c43bd;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(124,67,189,0.18);
+    padding: 32px 24px 24px 24px;
+    text-align: center;
+    min-width: 260px;
+    max-width: 90vw;
+    position: relative;
+    font-family: 'Merriweather', serif;
+}
+.postcard-content img {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border: 2px solid #b39ddb;
+}
+.postcard-content h3 {
+    color: #7c43bd;
+    margin: 0 0 10px 0;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6em;
+}
+.postcard-content p {
+    color: #4a148c;
+    font-size: 1.1em;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    font-size: 2em;
+    color: #7c43bd;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    .postcard-content {
+        padding: 18px 6vw 18px 6vw;
+        min-width: 0;
+    }
+    .postcard-content img {
+        width: 90vw;
+        height: auto;
+        max-width: 220px;
+    }
+}

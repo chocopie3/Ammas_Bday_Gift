@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin the Wheel Surprise</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <style>
+        .wheel-container { max-width: 420px; margin: 40px auto; text-align: center; }
+        .wheel-canvas { margin: 0 auto; display: block; background: #ede7f6; border-radius: 50%; box-shadow: 0 2px 8px rgba(124,67,189,0.10); }
+        .start-btn { margin-top: 24px; background: #b39ddb; color: #fff; border: none; border-radius: 18px; padding: 10px 28px; font-size: 1.1em; cursor: pointer; }
+        .back-btn { margin-top: 24px; background: #ede7f6; color: #7c43bd; border: 2px solid #7c43bd; border-radius: 18px; padding: 10px 28px; font-size: 1.1em; cursor: pointer; }
+        .result-msg { margin-top: 24px; font-size: 1.2em; color: #7c43bd; font-family: 'Indie Flower', cursive; }
+    </style>
+</head>
+<body>
+    <div class="wheel-container">
+        <h2 style="font-family: 'Dancing Script', cursive; color: #7c43bd;">Spin the Wheel Surprise</h2>
+        <canvas id="wheel" width="320" height="320" class="wheel-canvas"></canvas>
+        <button class="start-btn" id="start-spin">Start</button>
+        <div class="result-msg" id="wheel-result"></div>
+        <button class="back-btn" onclick="window.location.href='celebration.html'">Back</button>
+    </div>
+    <script>
+    const segments = [
+        'Riddle: What has keys but can’t open locks? (A piano)',
+        'Tongue Twister: She sells seashells by the seashore',
+        'Game: Do your best dance move for 10 seconds!',
+        'Challenge: Give yourself a compliment out loud!',
+        'Riddle: What gets wetter as it dries? (A towel)',
+        'Tongue Twister: Red lorry, yellow lorry',
+        'Game: Make the silliest face you can!',
+        'Challenge: Tell a funny story or memory!',
+        'Riddle: What has a heart that doesn’t beat? (An artichoke)',
+        'Tongue Twister: Unique New York',
+        'Game: Try to balance a book on your head for 5 seconds!',
+        'Challenge: Give a big air hug to the room!',
+        'Riddle: What comes down but never goes up? (Rain)',
+        'Tongue Twister: Fuzzy Wuzzy was a bear',
+        'Game: Say “I am awesome!” three times!',
+        'Challenge: Share one thing you’re grateful for today!',
+        'Riddle: What has hands but can’t clap? (A clock)',
+        'Tongue Twister: Toy boat, toy boat, toy boat',
+        'Game: Spin around in your chair (carefully!)',
+        'Challenge: Smile for 10 seconds straight!'
+    ];
+    const colors = ['#b39ddb','#ede7f6','#7c43bd','#d1c4e9','#9575cd','#ede7f6','#b39ddb','#7c43bd','#ede7f6','#b39ddb'];
+    const wheel = document.getElementById('wheel');
+    const ctx = wheel.getContext('2d');
+    const result = document.getElementById('wheel-result');
+    let angle = 0, spinning = false;
+    function drawWheel() {
+        const seg = segments.length;
+        const arc = 2 * Math.PI / seg;
+        for(let i=0;i<seg;i++){
+            ctx.beginPath();
+            ctx.moveTo(160,160);
+            ctx.arc(160,160,150,i*arc,(i+1)*arc);
+            ctx.closePath();
+            ctx.fillStyle = colors[i%colors.length];
+            ctx.fill();
+            ctx.save();
+            ctx.translate(160,160);
+            ctx.rotate(i*arc+arc/2);
+            ctx.textAlign = 'right';
+            ctx.font = '16px Indie Flower, cursive';
+            ctx.fillStyle = '#512da8';
+            ctx.fillText(segments[i].split(':')[0], 140,8);
+            ctx.restore();
+        }
+        // Draw pointer
+        ctx.beginPath();
+        ctx.moveTo(160,10);
+        ctx.lineTo(150,30);
+        ctx.lineTo(170,30);
+        ctx.closePath();
+        ctx.fillStyle = '#7c43bd';
+        ctx.fill();
+    }
+    drawWheel();
+    document.getElementById('start-spin').onclick = function() {
+        if(spinning) return;
+        spinning = true;
+        result.textContent = '';
+        let spinAngle = Math.random()*2*Math.PI + 8*Math.PI;
+        let start = null;
+        function animate(ts){
+            if(!start) start = ts;
+            let progress = (ts-start)/1800;
+            if(progress>1) progress=1;
+            angle = spinAngle*progress;
+            ctx.clearRect(0,0,320,320);
+            ctx.save();
+            ctx.translate(160,160);
+            ctx.rotate(angle);
+            ctx.translate(-160,-160);
+            drawWheel();
+            ctx.restore();
+            if(progress<1){
+                requestAnimationFrame(animate);
+            }else{
+                spinning = false;
+                const seg = segments.length;
+                const arc = 2 * Math.PI / seg;
+                let idx = seg - Math.floor(((angle%(2*Math.PI))/arc)) - 1;
+                if(idx<0) idx+=seg;
+                result.textContent = segments[idx];
+            }
+        }
+        requestAnimationFrame(animate);
+    };
+    </script>
+</body>
+</html>

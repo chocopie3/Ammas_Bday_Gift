@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Amma!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Happy Birthday to the Most Iconic Woman Alive</h1>
+            <div class="banner-quote">“To the world you are a mother, but to our family you are the world.”</div>
+        </header>
+        <main id="main-content">
+            <section class="message">
+                <h2>To the best Mom in the world,</h2>
+                <p>Wishing you a day filled with love, joy, and laughter. Thank you for everything you do. You are our rock, our inspiration, and our greatest supporter. We love you more than words can say!</p>
+                <p>With all our love,<br>Your loving family</p>
+            </section>
+            <section class="photo-center">
+                <div class="oval-frame">
+                    <img src="https://via.placeholder.com/300x400.png?text=Your+Mom's+Photo" alt="Mom's Portrait">
+                </div>
+                <button class="enter-btn" id="enter-btn" onclick="window.location.href='celebration.html'">Enter the Celebration</button>
+            </section>
+            <div id="celebration-sections" style="display:none;">
+                <!-- 🎁 Gifts Gallery -->
+                <section class="gifts-gallery">
+                    <h2>🎁 100 Gifts Portal</h2>
+                    <div class="gifts-grid">
+                        <!-- 100 clickable squares will go here -->
+                        <div class="gift-square placeholder">1</div>
+                        <div class="gift-square placeholder">2</div>
+                        <div class="gift-square placeholder">3</div>
+                        <!-- ... up to 100 ... -->
+                    </div>
+                    <p class="gallery-note">Click a square to reveal a gift!</p>
+                </section>
+                <!-- 📸 Memory Lane -->
+                <section class="memory-lane">
+                    <h2>📸 Memory Lane</h2>
+                    <div class="timeline">
+                        <!-- Timeline items will go here -->
+                        <div class="timeline-item">Born: The legend begins!</div>
+                        <div class="timeline-item">Survived Harshini’s teenage phase 😅</div>
+                        <!-- Add more milestones here -->
+                    </div>
+                </section>
+                <!-- 💌 Letters & Messages -->
+                <section class="letters-messages">
+                    <h2>💌 Letters & Messages</h2>
+                    <div class="letters">
+                        <div class="letter">
+                            <h3>From Harshini</h3>
+                            <p>Dear Amma, ... (your letter here) ...</p>
+                        </div>
+                        <!-- Add more messages from family/friends here -->
+                    </div>
+                    <div class="open-when">
+                        <h4>Open When...</h4>
+                        <ul>
+                            <li>...you need a laugh</li>
+                            <li>...you miss me</li>
+                            <!-- Add more digital cards -->
+                        </ul>
+                    </div>
+                </section>
+                <!-- 🎮 Interactive Zone -->
+                <section class="interactive-zone">
+                    <h2>🎮 Interactive Zone</h2>
+                    <ul>
+                        <li>Mom Mood Meter (spinner)</li>
+                        <li>Guess the Memory (quiz)</li>
+                        <li>Mom vs. Teen (scoreboard)</li>
+                    </ul>
+                    <!-- Add interactive features here -->
+                </section>
+            </div>
+        </main>
+        <footer>
+            <p>Made with ❤️</p>
+        </footer>
+    </div>
+    <script>
+      document.getElementById('enter-btn').addEventListener('click', function() {
+        var sections = document.getElementById('celebration-sections');
+        sections.style.display = 'block';
+        sections.scrollIntoView({behavior: 'smooth'});
+        this.style.display = 'none';
+      });
+    </script>
+</body>
+</html>
